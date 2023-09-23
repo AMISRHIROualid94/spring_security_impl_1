@@ -2,6 +2,8 @@ package org.oualid.ssi.providers;
 
 import org.oualid.ssi.manageUsers.CustomUserDetails;
 import org.oualid.ssi.manageUsers.JpaUserDetailsService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -16,6 +18,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class AuthenticationProviderService implements AuthenticationProvider {
+
+//    private final Logger logger = LoggerFactory.getLogger(AuthenticationProviderService.class);
 
     @Autowired
     private JpaUserDetailsService jpaUserDetailsService;
@@ -33,6 +37,10 @@ public class AuthenticationProviderService implements AuthenticationProvider {
 
         CustomUserDetails user = jpaUserDetailsService.loadUserByUsername(username);
 
+//        if(user.getUser().getAlgorithm() != null){
+//            logger.info(user.getUser().getPassword().split("}")[0]);
+//            return checkPassword(user,password,passwordEncoder);
+//        }
         switch (user.getUser().getAlgorithm()){
             case BCRYPT:
                 return checkPassword(user,password,bCryptPasswordEncoder);

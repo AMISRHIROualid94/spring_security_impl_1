@@ -8,7 +8,13 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.scrypt.SCryptPasswordEncoder;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Configuration
 public class ProjectConfig extends WebSecurityConfigurerAdapter {
@@ -21,6 +27,14 @@ public class ProjectConfig extends WebSecurityConfigurerAdapter {
         this.authenticationProviderService = authenticationProviderService;
     }
 
+//    @Bean
+//    public PasswordEncoder encoder(){
+//        Map<String,PasswordEncoder> encoders = new HashMap<>();
+//        encoders.put("noop", NoOpPasswordEncoder.getInstance());
+//        encoders.put("bcrypt", new BCryptPasswordEncoder());
+//        encoders.put("scrypt", new SCryptPasswordEncoder());
+//        return new DelegatingPasswordEncoder("scrypt",encoders);
+//    }
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder(){
         return new BCryptPasswordEncoder();

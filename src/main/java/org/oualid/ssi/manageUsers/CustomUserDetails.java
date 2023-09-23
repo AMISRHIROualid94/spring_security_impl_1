@@ -1,5 +1,6 @@
 package org.oualid.ssi.manageUsers;
 
+import lombok.Data;
 import org.oualid.ssi.models.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -7,18 +8,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.stream.Collectors;
-
+@Data
 public class CustomUserDetails implements UserDetails {
 
     private final User user;
-
-    public CustomUserDetails(User user) {
-        this.user = user;
-    }
-
-    public User getUser(){
-        return user;
-    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
