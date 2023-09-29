@@ -27,6 +27,7 @@ public class User {
     @Column(name = "algorithm")
     private EncryptionAlgorithm algorithm;
 
-    @OneToMany(mappedBy = "user",fetch = FetchType.EAGER)
-    private List<Authority> authorities;
+    @OneToOne
+    @JoinColumn(name = "role")
+    private Role role;
 }

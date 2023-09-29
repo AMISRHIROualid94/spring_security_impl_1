@@ -10,7 +10,8 @@ import javax.persistence.*;
 public class Authority {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "GEN_DB_AUTHORITY")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "GEN_SEQ_DB_AUTHORITY")
+    @SequenceGenerator(name = "GEN_SEQ_DB_AUTHORITY",sequenceName = "SEQ_DB_AUTHORITY")
     @Column(name = "authority_id")
     private Long id;
 
@@ -18,8 +19,8 @@ public class Authority {
     private String name; //role
 
     @ManyToOne
-    @JoinColumn(name = "user")
-    User user;
+    @JoinColumn(name = "role")
+    private Role role;
 
 
 
